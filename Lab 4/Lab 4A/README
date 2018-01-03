@@ -1,0 +1,18 @@
+#NAME: Rahul Sheth
+#EMAIL: rahulssheth@g.ucla.edu
+#ID: 304779669
+
+
+Serial Number of BeagleBoone: BBGW17080091
+WiFi Mac Address: 2c:f7:f1:06:69:5b
+USB Connection: 192.168.7.2
+
+my_beaglebone.jpg is a simple jpg file that has a screenshot of me holding my BeagleBone. 
+
+connected.png is a simple png file that I took after I connected with the command ssh root@192.168.7.2 and changed the hostname
+
+copy.png is a simple png where I copied a hello.c file I wrote on my Desktop to my beaglebone.
+
+build_run.png is a simple png file where i compiled and run the hello.c that i copied from my local desktop
+
+git.png is a simple png file where I cloned a repository from my personal github. 

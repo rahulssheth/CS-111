@@ -1,0 +1,1593 @@
+Total: 426 samples
+     185  43.4%  43.4%      329  77.2% insertionSpin
+     144  33.8%  77.2%      144  33.8% SortedList_insert
+      50  11.7%  89.0%       50  11.7% lookupSpin
+      43  10.1%  99.1%       43  10.1% deletionSpin
+       3   0.7%  99.8%      426 100.0% threadFunc
+       1   0.2% 100.0%        1   0.2% spinLength
+       0   0.0% 100.0%      426 100.0% __clone
+       0   0.0% 100.0%      426 100.0% start_thread
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   185    329 Total samples (flat / cumulative)
+     .      .  110:   }
+     .      .  111:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  112: 	
+     .      .  113: }
+     .      .  114: 
+---
+     .      .  115: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  116:   struct timespec start, end; 
+     .      .  117:   if (num_lists == 1) {
+     .      .  118:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   183    183  119:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  120:   }
+     .      .  121:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  122: 
+     .      .  123:   
+     .      .  124:    
+     2    146  125:     SortedList_insert(globalList, element);
+     .      .  126:      
+     .      .  127:   
+     .      .  128:   __sync_lock_release(&lockVal);
+     .      .  129:   
+     .      .  130:   } else {
+     .      .  131:     const char* curKey = element->key;
+     .      .  132:     int list = (*curKey) % num_lists;
+     .      .  133:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  134:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  135:       }
+     .      .  136:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  137:      
+     .      .  138:       SortedList_insert(topHeader[list], element);
+     .      .  139:       __sync_lock_release(&topLockVals[list]);
+     .      .  140:        
+     .      .  141: 
+     .      .  142: 
+     .      .  143:       }
+     .      .  144:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  145: 
+     .      .  146:   
+     .      .  147: }
+---
+     .      .  148: 
+     .      .  149: void deletion(SortedListElement_t* element) {
+     .      .  150:   
+     .      .  151:   
+     .      .  152:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   185    329 Total samples (flat / cumulative)
+     .      .  110:   }
+     .      .  111:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  112: 	
+     .      .  113: }
+     .      .  114: 
+---
+     .      .  115: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  116:   struct timespec start, end; 
+     .      .  117:   if (num_lists == 1) {
+     .      .  118:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   183    183  119:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  120:   }
+     .      .  121:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  122: 
+     .      .  123:   
+     .      .  124:    
+     2    146  125:     SortedList_insert(globalList, element);
+     .      .  126:      
+     .      .  127:   
+     .      .  128:   __sync_lock_release(&lockVal);
+     .      .  129:   
+     .      .  130:   } else {
+     .      .  131:     const char* curKey = element->key;
+     .      .  132:     int list = (*curKey) % num_lists;
+     .      .  133:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  134:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  135:       }
+     .      .  136:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  137:      
+     .      .  138:       SortedList_insert(topHeader[list], element);
+     .      .  139:       __sync_lock_release(&topLockVals[list]);
+     .      .  140:        
+     .      .  141: 
+     .      .  142: 
+     .      .  143:       }
+     .      .  144:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  145: 
+     .      .  146:   
+     .      .  147: }
+---
+     .      .  148: 
+     .      .  149: void deletion(SortedListElement_t* element) {
+     .      .  150:   
+     .      .  151:   
+     .      .  152:   int retVal = SortedList_delete(element);
+Total: 421 samples
+     178  42.3%  42.3%      323  76.7% insertionSpin
+     144  34.2%  76.5%      144  34.2% SortedList_insert
+      66  15.7%  92.2%       66  15.7% lookupSpin
+      32   7.6%  99.8%       32   7.6% deletionSpin
+       1   0.2% 100.0%        1   0.2% 0x00007ffd812e08f7
+       0   0.0% 100.0%        1   0.2% __GI___clock_gettime
+       0   0.0% 100.0%      421 100.0% __clone
+       0   0.0% 100.0%      421 100.0% start_thread
+       0   0.0% 100.0%      421 100.0% threadFunc
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   178    323 Total samples (flat / cumulative)
+     .      .  110:   }
+     .      .  111:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  112: 	
+     .      .  113: }
+     .      .  114: 
+---
+     .      .  115: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  116:   struct timespec start, end; 
+     .      .  117:   if (num_lists == 1) {
+     .      .  118:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   178    178  119:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  120:   }
+     .      1  121:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  122: 
+     .      .  123:   
+     .      .  124:    
+     .    144  125:     SortedList_insert(globalList, element);
+     .      .  126:      
+     .      .  127:   
+     .      .  128:   __sync_lock_release(&lockVal);
+     .      .  129:   
+     .      .  130:   } else {
+     .      .  131:     const char* curKey = element->key;
+     .      .  132:     int list = (*curKey) % num_lists;
+     .      .  133:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  134:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  135:       }
+     .      .  136:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  137:      
+     .      .  138:       SortedList_insert(topHeader[list], element);
+     .      .  139:       __sync_lock_release(&topLockVals[list]);
+     .      .  140:        
+     .      .  141: 
+     .      .  142: 
+     .      .  143:       }
+     .      .  144:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  145: 
+     .      .  146:   
+     .      .  147: }
+---
+     .      .  148: 
+     .      .  149: void deletion(SortedListElement_t* element) {
+     .      .  150:   
+     .      .  151:   
+     .      .  152:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   178    323 Total samples (flat / cumulative)
+     .      .  110:   }
+     .      .  111:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  112: 	
+     .      .  113: }
+     .      .  114: 
+---
+     .      .  115: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  116:   struct timespec start, end; 
+     .      .  117:   if (num_lists == 1) {
+     .      .  118:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   178    178  119:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  120:   }
+     .      1  121:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  122: 
+     .      .  123:   
+     .      .  124:    
+     .    144  125:     SortedList_insert(globalList, element);
+     .      .  126:      
+     .      .  127:   
+     .      .  128:   __sync_lock_release(&lockVal);
+     .      .  129:   
+     .      .  130:   } else {
+     .      .  131:     const char* curKey = element->key;
+     .      .  132:     int list = (*curKey) % num_lists;
+     .      .  133:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  134:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  135:       }
+     .      .  136:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  137:      
+     .      .  138:       SortedList_insert(topHeader[list], element);
+     .      .  139:       __sync_lock_release(&topLockVals[list]);
+     .      .  140:        
+     .      .  141: 
+     .      .  142: 
+     .      .  143:       }
+     .      .  144:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  145: 
+     .      .  146:   
+     .      .  147: }
+---
+     .      .  148: 
+     .      .  149: void deletion(SortedListElement_t* element) {
+     .      .  150:   
+     .      .  151:   
+     .      .  152:   int retVal = SortedList_delete(element);
+Total: 367 samples
+     100  27.2%  27.2%      189  51.5% insertionSpin
+      89  24.3%  51.5%       89  24.3% SortedList_insert
+      77  21.0%  72.5%      117  31.9% lookupSpin
+      59  16.1%  88.6%       60  16.3% deletionSpin
+      38  10.4%  98.9%       38  10.4% SortedList_lookup
+       1   0.3%  99.2%        1   0.3% 0x00007ffd48395700
+       1   0.3%  99.5%        1   0.3% 0x00007ffd483958e4
+       1   0.3%  99.7%        1   0.3% 0x00007ffd48395986
+       1   0.3% 100.0%      367 100.0% __clone
+       0   0.0% 100.0%        3   0.8% __GI___clock_gettime
+       0   0.0% 100.0%      366  99.7% start_thread
+       0   0.0% 100.0%      366  99.7% threadFunc
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   100    189 Total samples (flat / cumulative)
+     .      .  113:   }
+     .      .  114:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  115: 	
+     .      .  116: }
+     .      .  117: 
+---
+     .      .  118: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  119:   struct timespec start, end; 
+     .      .  120:   if (num_lists == 1) {
+     .      .  121:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   100    100  122:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  123:   }
+     .      .  124:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  125: 
+     .      .  126:   
+     .      .  127:    
+     .     89  128:     SortedList_insert(globalList, element);
+     .      .  129:      
+     .      .  130:   
+     .      .  131:   __sync_lock_release(&lockVal);
+     .      .  132:   
+     .      .  133:   } else {
+     .      .  134:     const char* curKey = element->key;
+     .      .  135:     int list = (*curKey) % num_lists;
+     .      .  136:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  137:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  138:       }
+     .      .  139:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  140:      
+     .      .  141:       SortedList_insert(topHeader[list], element);
+     .      .  142:       __sync_lock_release(&topLockVals[list]);
+     .      .  143:        
+     .      .  144: 
+     .      .  145: 
+     .      .  146:       }
+     .      .  147:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  148: 
+     .      .  149:   
+     .      .  150: }
+---
+     .      .  151: 
+     .      .  152: void deletion(SortedListElement_t* element) {
+     .      .  153:   
+     .      .  154:   
+     .      .  155:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   100    189 Total samples (flat / cumulative)
+     .      .  113:   }
+     .      .  114:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  115: 	
+     .      .  116: }
+     .      .  117: 
+---
+     .      .  118: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  119:   struct timespec start, end; 
+     .      .  120:   if (num_lists == 1) {
+     .      .  121:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   100    100  122:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  123:   }
+     .      .  124:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  125: 
+     .      .  126:   
+     .      .  127:    
+     .     89  128:     SortedList_insert(globalList, element);
+     .      .  129:      
+     .      .  130:   
+     .      .  131:   __sync_lock_release(&lockVal);
+     .      .  132:   
+     .      .  133:   } else {
+     .      .  134:     const char* curKey = element->key;
+     .      .  135:     int list = (*curKey) % num_lists;
+     .      .  136:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  137:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  138:       }
+     .      .  139:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  140:      
+     .      .  141:       SortedList_insert(topHeader[list], element);
+     .      .  142:       __sync_lock_release(&topLockVals[list]);
+     .      .  143:        
+     .      .  144: 
+     .      .  145: 
+     .      .  146:       }
+     .      .  147:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  148: 
+     .      .  149:   
+     .      .  150: }
+---
+     .      .  151: 
+     .      .  152: void deletion(SortedListElement_t* element) {
+     .      .  153:   
+     .      .  154:   
+     .      .  155:   int retVal = SortedList_delete(element);
+Total: 416 samples
+     106  25.5%  25.5%      106  25.5% SortedList_insert
+     105  25.2%  50.7%      212  51.0% insertionSpin
+      81  19.5%  70.2%      149  35.8% lookupSpin
+      67  16.1%  86.3%       67  16.1% SortedList_lookup
+      54  13.0%  99.3%       54  13.0% deletionSpin
+       1   0.2%  99.5%        1   0.2% 0x00007ffe4e3e58c9
+       1   0.2%  99.8%        1   0.2% 0x00007ffe4e3e5906
+       1   0.2% 100.0%        1   0.2% SortedList_length
+       0   0.0% 100.0%        2   0.5% __GI___clock_gettime
+       0   0.0% 100.0%      416 100.0% __clone
+       0   0.0% 100.0%        1   0.2% spinLength
+       0   0.0% 100.0%      416 100.0% start_thread
+       0   0.0% 100.0%      416 100.0% threadFunc
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   105    212 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   105    105  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .    106  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   105    212 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   105    105  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .    106  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 404 samples
+     140  34.7%  34.7%      213  52.7% insertionSpin
+      90  22.3%  56.9%      131  32.4% lookupSpin
+      73  18.1%  75.0%       73  18.1% SortedList_insert
+      58  14.4%  89.4%       59  14.6% deletionSpin
+      40   9.9%  99.3%       40   9.9% SortedList_lookup
+       1   0.2%  99.5%        1   0.2% 0x00007ffd0eca38c9
+       1   0.2%  99.8%        1   0.2% 0x00007ffd0eca3988
+       1   0.2% 100.0%      404 100.0% threadFunc
+       0   0.0% 100.0%        2   0.5% __GI___clock_gettime
+       0   0.0% 100.0%      404 100.0% __clone
+       0   0.0% 100.0%      404 100.0% start_thread
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   140    213 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   139    139  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     1     74  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   140    213 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   139    139  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     1     74  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 398 samples
+     144  36.2%  36.2%      212  53.3% insertionSpin
+      98  24.6%  60.8%       98  24.6% SortedList_lookup
+      68  17.1%  77.9%       68  17.1% SortedList_insert
+      52  13.1%  91.0%      150  37.7% lookupSpin
+      32   8.0%  99.0%       34   8.5% deletionSpin
+       1   0.3%  99.2%        1   0.3% 0x00007fffbaaac906
+       1   0.3%  99.5%        1   0.3% 0x00007fffbaaac9bb
+       1   0.3%  99.7%        1   0.3% spinLength
+       1   0.3% 100.0%      398 100.0% threadFunc
+       0   0.0% 100.0%        2   0.5% __GI___clock_gettime
+       0   0.0% 100.0%      398 100.0% __clone
+       0   0.0% 100.0%      398 100.0% start_thread
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   144    212 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   144    144  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     68  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   144    212 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   144    144  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     68  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 416 samples
+     146  35.1%  35.1%      218  52.4% insertionSpin
+      79  19.0%  54.1%       79  19.0% SortedList_lookup
+      71  17.1%  71.2%       71  17.1% SortedList_insert
+      66  15.9%  87.0%      145  34.9% lookupSpin
+      53  12.7%  99.8%       53  12.7% deletionSpin
+       1   0.2% 100.0%        1   0.2% 0x00007ffe548d88da
+       0   0.0% 100.0%        1   0.2% __GI___clock_gettime
+       0   0.0% 100.0%      416 100.0% __clone
+       0   0.0% 100.0%      416 100.0% start_thread
+       0   0.0% 100.0%      416 100.0% threadFunc
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   146    218 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      1  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   146    146  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     71  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   146    218 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      1  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   146    146  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     71  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 407 samples
+     145  35.6%  35.6%      220  54.1% insertionSpin
+      81  19.9%  55.5%       81  19.9% SortedList_lookup
+      73  17.9%  73.5%       73  17.9% SortedList_insert
+      59  14.5%  88.0%      140  34.4% lookupSpin
+      44  10.8%  98.8%       44  10.8% deletionSpin
+       2   0.5%  99.3%      407 100.0% threadFunc
+       1   0.2%  99.5%        1   0.2% 0x00007ffc67ffd988
+       1   0.2%  99.8%        2   0.5% __GI___clock_gettime
+       1   0.2% 100.0%        1   0.2% spinLength
+       0   0.0% 100.0%      407 100.0% __clone
+       0   0.0% 100.0%      407 100.0% start_thread
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   145    220 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      1  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   143    143  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     2     75  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   145    220 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      1  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   143    143  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     2     75  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 375 samples
+     117  31.2%  31.2%      194  51.7% insertionSpin
+      76  20.3%  51.5%       76  20.3% SortedList_insert
+      66  17.6%  69.1%      124  33.1% lookupSpin
+      58  15.5%  84.5%       58  15.5% SortedList_lookup
+      54  14.4%  98.9%       54  14.4% deletionSpin
+       2   0.5%  99.5%      375 100.0% threadFunc
+       1   0.3%  99.7%        1   0.3% 0x00007ffdb27e0704
+       1   0.3% 100.0%        1   0.3% SortedList_length
+       0   0.0% 100.0%        1   0.3% __GI___clock_gettime
+       0   0.0% 100.0%      375 100.0% __clone
+       0   0.0% 100.0%        1   0.3% spinLength
+       0   0.0% 100.0%      375 100.0% start_thread
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   117    194 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   117    117  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     76  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   117    194 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   117    117  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     76  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 417 samples
+     115  27.6%  27.6%      201  48.2% insertionSpin
+      91  21.8%  49.4%       91  21.8% SortedList_lookup
+      85  20.4%  69.8%       85  20.4% SortedList_insert
+      65  15.6%  85.4%      156  37.4% lookupSpin
+      59  14.1%  99.5%       60  14.4% deletionSpin
+       1   0.2%  99.8%        1   0.2% 0x00007fff1c3a0700
+       1   0.2% 100.0%        1   0.2% 0x00007fff1c3a0939
+       0   0.0% 100.0%        2   0.5% __GI___clock_gettime
+       0   0.0% 100.0%      417 100.0% __clone
+       0   0.0% 100.0%      417 100.0% start_thread
+       0   0.0% 100.0%      417 100.0% threadFunc
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   115    201 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      1  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   115    115  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     85  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   115    201 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      1  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   115    115  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     85  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 370 samples
+     103  27.8%  27.8%      188  50.8% insertionSpin
+      91  24.6%  52.4%      131  35.4% lookupSpin
+      84  22.7%  75.1%       84  22.7% SortedList_insert
+      49  13.2%  88.4%       49  13.2% deletionSpin
+      40  10.8%  99.2%       40  10.8% SortedList_lookup
+       1   0.3%  99.5%        1   0.3% 0x00007fff545e8988
+       1   0.3%  99.7%        1   0.3% __munmap
+       1   0.3% 100.0%      369  99.7% threadFunc
+       0   0.0% 100.0%        1   0.3% __GI___clock_gettime
+       0   0.0% 100.0%      369  99.7% __clone
+       0   0.0% 100.0%        1   0.3% __deallocate_stack
+       0   0.0% 100.0%        1   0.3% __free_stacks
+       0   0.0% 100.0%        1   0.3% __libc_start_main
+       0   0.0% 100.0%        1   0.3% _start
+       0   0.0% 100.0%        1   0.3% main
+       0   0.0% 100.0%        1   0.3% pthread_join
+       0   0.0% 100.0%      369  99.7% start_thread
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   103    188 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      1  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   103    103  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     84  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   103    188 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      1  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   103    103  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     84  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 410 samples
+     135  32.9%  32.9%      220  53.7% insertionSpin
+      86  21.0%  53.9%       86  21.0% SortedList_lookup
+      84  20.5%  74.4%       84  20.5% SortedList_insert
+      55  13.4%  87.8%      141  34.4% lookupSpin
+      48  11.7%  99.5%       48  11.7% deletionSpin
+       1   0.2%  99.8%        1   0.2% 0x00007fff298f58f7
+       1   0.2% 100.0%        1   0.2% spinLength
+       0   0.0% 100.0%        1   0.2% __GI___clock_gettime
+       0   0.0% 100.0%      410 100.0% __clone
+       0   0.0% 100.0%      410 100.0% start_thread
+       0   0.0% 100.0%      410 100.0% threadFunc
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   135    220 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   135    135  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     84  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   135    220 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   135    135  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     84  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 365 samples
+     125  34.2%  34.2%      152  41.6% insertionSpin
+     104  28.5%  62.7%      136  37.3% lookupSpin
+      75  20.5%  83.3%       75  20.5% deletionSpin
+      32   8.8%  92.1%       32   8.8% SortedList_lookup
+      27   7.4%  99.5%       27   7.4% SortedList_insert
+       1   0.3%  99.7%        1   0.3% __GI_madvise
+       1   0.3% 100.0%        1   0.3% spinLength
+       0   0.0% 100.0%      365 100.0% __clone
+       0   0.0% 100.0%      365 100.0% start_thread
+       0   0.0% 100.0%      364  99.7% threadFunc
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   125    152 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   124    124  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     1     28  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   125    152 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   124    124  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     1     28  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 313 samples
+     115  36.7%  36.7%      157  50.2% insertionSpin
+      72  23.0%  59.7%       94  30.0% lookupSpin
+      60  19.2%  78.9%       60  19.2% deletionSpin
+      41  13.1%  92.0%       41  13.1% SortedList_insert
+      22   7.0%  99.0%       22   7.0% SortedList_lookup
+       1   0.3%  99.4%        1   0.3% SortedList_length
+       1   0.3%  99.7%        1   0.3% __GI___clock_gettime
+       1   0.3% 100.0%      313 100.0% threadFunc
+       0   0.0% 100.0%      313 100.0% __clone
+       0   0.0% 100.0%        1   0.3% spinLength
+       0   0.0% 100.0%      313 100.0% start_thread
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   115    157 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   114    114  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     1     42  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   115    157 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   114    114  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      1  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     1     42  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+Total: 381 samples
+     108  28.3%  28.3%      182  47.8% insertionSpin
+      93  24.4%  52.8%       93  24.4% SortedList_lookup
+      74  19.4%  72.2%       74  19.4% SortedList_insert
+      63  16.5%  88.7%      156  40.9% lookupSpin
+      41  10.8%  99.5%       42  11.0% deletionSpin
+       1   0.3%  99.7%        1   0.3% 0x00007ffea1f848c5
+       1   0.3% 100.0%      381 100.0% threadFunc
+       0   0.0% 100.0%        1   0.3% __GI___clock_gettime
+       0   0.0% 100.0%      381 100.0% __clone
+       0   0.0% 100.0%      381 100.0% start_thread
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   108    182 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   108    108  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     74  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);
+ROUTINE ====================== insertionSpin in /u/cs/ugrad/sheth/Project2B/Project2B/lab2_list.c
+   108    182 Total samples (flat / cumulative)
+     .      .  114:   }
+     .      .  115:   perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec)); 
+     .      .  116: 	
+     .      .  117: }
+     .      .  118: 
+---
+     .      .  119: void insertionSpin(SortedListElement_t* element, int tid) {
+     .      .  120:   struct timespec start, end; 
+     .      .  121:   if (num_lists == 1) {
+     .      .  122:     clock_gettime(CLOCK_MONOTONIC, &start); 
+   108    108  123:   while (__sync_lock_test_and_set(&lockVal, 1)) {
+     .      .  124:   }
+     .      .  125:    clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  126: 
+     .      .  127:   
+     .      .  128:    
+     .     74  129:     SortedList_insert(globalList, element);
+     .      .  130:      
+     .      .  131:   
+     .      .  132:   __sync_lock_release(&lockVal);
+     .      .  133:   
+     .      .  134:   } else {
+     .      .  135:     int curKey = atoi(element->key);
+     .      .  136:     int list = (curKey + 128) % num_lists;
+     .      .  137:     clock_gettime(CLOCK_MONOTONIC, &start); 
+     .      .  138:     while (__sync_lock_test_and_set(&topLockVals[list], 1)) {
+     .      .  139:       }
+     .      .  140:       clock_gettime(CLOCK_MONOTONIC, &end);
+     .      .  141:      
+     .      .  142:       SortedList_insert(topHeader[list], element);
+     .      .  143:       __sync_lock_release(&topLockVals[list]);
+     .      .  144:        
+     .      .  145: 
+     .      .  146: 
+     .      .  147:       }
+     .      .  148:     perThreadTimes[tid] += ((end.tv_sec - start.tv_sec) * 1000000 + (end.tv_nsec - start.tv_nsec));
+     .      .  149: 
+     .      .  150:   
+     .      .  151: }
+---
+     .      .  152: 
+     .      .  153: void deletion(SortedListElement_t* element) {
+     .      .  154:   
+     .      .  155:   
+     .      .  156:   int retVal = SortedList_delete(element);

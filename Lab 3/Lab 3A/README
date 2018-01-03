@@ -1,0 +1,24 @@
+#NAME: Rahul Sheth, Anirudh Veeraragavan
+#EMAIL: rahulssheth@g.ucla.edu, aveeraragavan@g.ucla.edu
+#ID: 304779669, 004767663
+
+
+
+README: 
+
+
+This is Rahul Sheth's README from Project3A. 
+
+Partner: Anirudh Veeraragavan 
+Partner Email: aveeraragavan@g.ucla.edu
+Partner id: 004767663 
+
+
+Makefile: 
+The Makefile has all of the functionality for make clean, clearing out the executable and the tarball, make dist, which create the tarball, and the default make, which makes the executable. 
+
+lab3a.c: 
+
+This is the main C-Source file which has all of the functionality of reading the disk. This will give you a summary of the EXT_2 filesystem's superblock, a summary for each group in the filesystem, all of the free blocks and free inodes, a summary of the allocated inodes, all of the Directory entries, and all indirect block references. This has been compiled and tested against trivial.img, a test file given by our Professor. 
+
+

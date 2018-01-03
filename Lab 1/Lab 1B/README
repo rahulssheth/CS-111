@@ -1,0 +1,21 @@
+NAME: Rahul Sheth
+EMAIL: rahulssheth@g.ucla.edu
+ID: 304779669
+
+For this project, we utilized TCP/IP Connection to set up a socket between a client and server connection so a user could input commands to the client and have them sent to the server, which would push them to a bash shell. The shell would then send it back to the client side, which would display the messages.
+
+LAB1B-Client.c: This is the source file for the client end of the connection. For this, we had to set up non-canonical no-echo mode input (similar to what we did in Lab1a), then we had to extract up to three options, then take in typical bash commands which we would send to the server.
+
+Complications: Some of the hardest parts of this was shut-down processing and setting up encryption and decryption with two separate modules.
+In addition, it was tough to figure out how to effectively convert a int to a string or multiple chars to print to the log. I initially just added by '0' but found that it would fail for edge cases like when it's greater than 10. This is why I found that sprintf would be better.
+
+Documentation: I used documentation for the TCP/IP Socket (mostly the tutorial given by Professor Reiher), the documentation for sprintf and help from my TA's
+
+
+LAB1B-Server.c: This is the source file for the server.
+
+Complications: The server wasn't as bad. However, coordinating the shut down processing was also fairly hard.
+
+Documation: I used similar documentation that I used for the client for the server.
+
+

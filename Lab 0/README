@@ -1,0 +1,36 @@
+NAME: Rahul Sheth
+EMAIL: rahulssheth@g.ucla.edu
+ID: 304779669
+
+
+The lab0.c file is the single C file with the implementation. 
+The two png files contain the GDB work I did. 
+The Makefile has all of the commands for make that I wrote 
+This README has general information for the tarball. 
+
+For this project, I utilized a fair amount of documentation. 
+
+1. To get an example of using the getOpt_Long function, I looked to the source file of the ls command to see how it is implemented there. 
+
+2. For the reads and writes, I utilized the link provided by Professor Reiher, File Descriptor Management. 
+
+3. For writing the signal handler, I utilized the man page for signal handlers and saw how to implement it based on that.
+
+4. For the Makefile, I used the format from past projects from CS 35L as inspiration for how to write mine for this project.
+
+5. Finally, I gained general assistance from my TA for the Makefile and smoke check. 
+
+
+SMOKE CHECK: 
+
+1. The first check is there to accomplish using standard files in the directory. 
+
+2. The second check is to see if we input the files directly, without the —input and —output commands, and see if it works. 
+
+3. The third check checks if we accurately implemented the catch command
+
+4. The fourth check sees if we correctly implemented segfault. 
+
+5. The fifth check sees if we identify nonexistent files and error out
+
+6. The sixth check sees what happens if we give a file that should not be opened to write. 

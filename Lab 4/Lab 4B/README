@@ -1,0 +1,17 @@
+#NAME: Rahul Sheth
+#EMAIL: rahulssheth@g.ucla.edu
+#ID: 304779669
+
+
+README: 
+
+
+These are the following files in my tar-ball. I have the C-Source module with lab4b.c, the Makefile, and this README File. 
+
+Description(lab4b.c): 
+
+This c-source module has the following functions. It has processPolls, which takes in the Command line input and processes it to check if it gave the OFF, START, STOP, PERIOD, or SCALE commands. Then it would do the proper processing according to each command. It also has the pollForCommands function which checks for standard input, then gets the temperature of the system and then sleeps for the period specified. I then have an exitRoutine which is called whenever OFF or the button is pushed. Then i have the getTemp function which is the algorithm for obtaining temperature. Then, there is getValueAndProcess, which actually reads in from the sensor and outputs the temperature in Fahrenheit. Then there are conversion functions between celsius and Fahrenheit. Finally, I have my main, which parses the command line arguments and executes all of the functions.
+
+Description(Makefile): 
+
+This has all of my compilation and general creation commands. I have the general build which compiles with the “lmraa” “lm” flags to include mraa and logarithm functions. Then I have make clean, which eliminates the tarball and the executable. Then I make the tarball with dist. Finally, I have my smoke check. 

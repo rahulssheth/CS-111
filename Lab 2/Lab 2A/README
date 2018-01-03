@@ -1,0 +1,42 @@
+NAME: Rahul Sheth
+EMAIL: rahulssheth@g.ucla.edu
+ID: 304779669
+
+
+README
+
+2.1.1: Causing Conflicts: 
+
+ANSWER: If we only have a few iterations, the program will run very fast. Therefore, due to the cost of overhead associated with creating each thread, each thread will take while to initialize. The iterations of the previous threads will most likely be finished before the next thread is initialized.
+
+
+
+2.1.2: Cost of Yielding:
+
+ANSWER: The yield is running much slower because of the overhead associated with a yield. When it occurs, the current thread's context is saved; this is a costly operation and is where the extra time is going.  It is not possible to get valid per-operation timings because if we get time we can't translate because we don't know how many CPU's are running.
+
+2.1.3: Measurement Errors:
+
+ANSWER: When there are more iterations being ran, the cost of thread creation and contect switching is less important and will happen in conjunction with other threads running and doing their functions. Most likely the curve will begin to level out at some point and therefore we can check over there to see how many operations we should run. That is because after that point there is not point in adding threads. 
+
+2.1.4: Costs of Serialization:
+
+ANSWER: When there are only a few amount of threads running, there will not be as much parallelism (at most there will be a few threads competing). Therefore, the fact that there are locks will not affect it as much as much because locks and mutexes only make a significant time difference when there are a lot of threads for them to block. Once the number of threads rises, the protected operations will begin to start blocking threads, which means the program will not be as parallelized and therefore will run slower.
+
+
+2.2.1: Scalability of Mutex:
+Generally the variation of time per mutex-protected operation for Part-1 and Part-2 is fairly similar as they start out fairly low with a lower number of threads and then steadily pick up as the number of threads increases, moving from roughly 50-100 nanoseconds for Part 1 and (on the adjusted scale for lists) from 5-20/30. The general shapes is a linear increase (although this depends on the scale), which is to be expected. On Part-1, it increases by a factor of roughly 10 by the end and in list it increases by a factor of 4-6 (length-adjusted). If it was not length adjusted, then I believe the list would increase much faster, which is to be expected as the insertion operation takes longer, giving a longer critical section that is locked from other threads.
+
+2.2.2: Scalability of Spin Locks:
+The spin lock implementation did increase about as fast as the mutex implementation, which is to be expected as the locking operations aren't all that different. Both carried a linear growth, which on the length-adjusted curve would equate to about a 10x from 1-4 threads. They have this increase primarily because they would have a similar operation with blocking all threads except for the one that is running.
+
+
+FILE INFORMATION:
+
+This tarball contains the following files:
+
+Lab2_add-1.png - Lab2_add-5.png: This is all of the png files with the graphs from Lab2_add. There are also PNG files for the second half of the lab.
+
+There are a few C-Source modules, such as lab2_add.c and lab2_list.c and SortedList.c which contain the actual implementation for this lab.
+
+Finally, there is the Makefile and the extra scripts to create the PNG and CSV files. 

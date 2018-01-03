@@ -1,0 +1,22 @@
+#NAME: Rahul Sheth
+#ID: 304779669
+#EMAIL: rahulssheth@g.ucla.edu
+
+
+README:
+
+This readme will contain information for Lab4c. 
+
+These are the following files present in the tarball.
+
+Lab4c_tcp.c and Lab4c_tls.c: 
+
+Two C-source modules written to allow for writing the temperature obtained from the Beaglebone sensor to the TCP Server and the encrypted TLS Server ran by CS 111. This was compiled with the -lm -lcrypto and -lssl flags to ensure that the openssl API could be used. 
+
+Makefile: 
+This will have the following commands:
+
+1. make: Compiles the C-Source modules to create 2 separate executables, one which can be used for TCP connection and another for TLS connection.
+2. dist: Creates the tarball which has the 2 C-Source modules, this README, and the Makefile
+3. clean: Deletes the executables and the tarball. 
+

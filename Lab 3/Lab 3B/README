@@ -1,0 +1,35 @@
+#NAME: Rahul Sheth
+#EMAIL: rahulssheth@g.ucla.edu
+#ID: 304779669
+
+
+README
+
+
+This tarball has three separate files:
+
+README 
+
+This is the current file.
+
+Makefile
+
+This is the file that deals with compilation. It has three separate commands:
+
+1. make 
+   Default make which compiles and output the lab3b executable. Takes in lab3b.cpp 
+   -Note: utilizes the -static-libstdc++ flag. 
+2. make dist
+   Creates the tarball with lab3b.cpp, Makefile, and README
+3. make clean:
+   Takes out the executable and the tarball
+
+
+lab3b.cpp: 
+
+This is a C++-Source module that contains the implementation of the csv checks. It initially sets up the global variables, looking at the superblock, placing all blocks that should be referenced in a vector, extracting the filename, etc. Then it performs the checks in the following order:
+1. Checking the free inodes and unallocated inodes. Then it proceeds to check all the indirect blocks and sets up the duplicate block implementation. 
+2. Checking to see if a block has been referenced more than once. 
+3. Checking all of the directory entries to see if they are valid. 
+4. Checking all of the reference counts to see if they match up with the linkcounts. 
+5. Checking if there are any unreferenced blocks. 

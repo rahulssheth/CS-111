@@ -1,0 +1,16 @@
+//NAME:RAHUL
+//EMAIL: rahulssheth@g.ucla.edu
+//ID: 304779669
+
+
+README
+
+Description of Files:
+
+lab1a.c:
+
+	This is my standard C-file with the implementation of the spec. I began with the implementation of the atexit function, which resets the terminal mode and prints the exit status. I then have my main function, which contains the area where I check for the "--shell" argument, set the terminal attributes, and then check if it's in shell mode or not. If it's in shell, I create my pipes, my process, and continue with it's implementation. One modification I made was to use SIGTERM instead of SIGINT if I saw a ^C interrupt. This is due to the implementation of the shell script and how if I used SIGINT, I would see a lot of orphans that were not mine. I was deciding whether to use SIGINT anyways; however, I remembered how the TA's would not grade the assignment unless we passed the sanity check so I decided against it. In terms of resources utilized, my TA Haitao's discussion notes and the man pages were a great reference.  
+
+MAKEFILE:
+
+	This is where I have my compilation command, which creates the lab1a executable, the make dist command, which makes the lab1a-304779669.tar.gz file which contains the Makefile, README, and lab1a.c, and the make clean command, which takes out tarfile and the lab1a executable. 

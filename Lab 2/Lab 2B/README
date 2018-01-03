@@ -1,0 +1,58 @@
+#NAME: Rahul Sheth
+#EMAIL: rahulssheth@g.ucla.edu
+#ID: 304779669
+
+
+README
+
+
+Question 2.3.1:
+1. For the one-two threaded programs, I believe most of the overhead goes into the creation of the threads. After that, I would believe that the actual computation, where we add elements into the linked List, would also take some time, but still less than thread creation. 
+
+2. In a synchronized multi-threaded operation, we have three different areas where CPU cycles may go; locking, thread creation, and computation. Since there are only 1-2 threads, no thread will have to spend a significant amount of time waiting for the other to unlock.
+
+3. On high-threaded spin lock tests, I believe most of the CPU cycles go in the spin-waiting of each thread for the lock. Locking itself would decrease parallelism, therefore increasing cycles and furthermore, the action of spinning itself takes CPU cycles.
+
+4. On high-threaded mutex-lock tests, I believe most of the CPU cycles go in the waiting for the lock to unlock to do the insertion, deletion, lookup, etc. Since there are many different threads, the chance of contention for locks is much higher.
+
+
+
+Question 2.3.2:
+
+1. For the spin-lock version of the test, most of the CPU cycles go in the spin-lock version of insertion, specifically the line where the thread is attempting to acquire the lock and is spinning.
+
+2. This operation becomes expensive with a large number of threads because the chance of contention for locks is much higher if there are more threads competing for each lock. Therefore, each thread will have to end up spending more time waiting for the lock.
+
+Question 2.3.3:
+
+To preface for this question, based on Graph2, we see a rise of magnitude of nearly 4-5 powers of ten for the wait-for-lock time but see a rise of magnitude of roughly 1 power of ten for the per operation time.
+
+1. The average wait-for-lock time increases so drastically because when you have many more threads in the mix the contention for each lock will be increasing. Each thread will have to wait more time for each lock so that time will naturally increase with more threads.
+
+2 + 3. The per-operation time increases less drastically because the effects of parallelism from having more threads will counteract most of the effects of having to wait for each lock. Furthermore, the threads can just yield in a mutex lock as opposed to having to spin in a spin-lock. However, the completion time will still rise for an increasing number of threads because the threads will still end up having to wait longer anyways. Furthermore, when they yield, they will have to perform a context switch. 
+
+
+Question 2.3.4:
+
+1. The performance of the synchronized lists should continue to increase as the number of lists increases because every list would have their own synchronization object and therefore the chances of lock contention should be much less, therefore, reducing the amount of time waiting for each thread. 
+
+2. In an ideal world, the throughput would continue to increase; however, in a realistic sense, we would be limited by computing power (number of CPU's, etc) and therefore at a certain point, if we added more lists, we would not see an increase in throughput.
+
+3. The throughput of a N-Way partitioned list should have a greater throughput than if we had less 
+
+
+
+
+PROJECT DESCRIPTION:
+
+This tarball contains all of the necessary deliverables. There are some noticeable changes from the Lab2A implementation that I found over the course of this lab that I made changes to:
+
+1. Randomized Keys: Under the previous iteration, the keys were simply assigned to the same letter each time. I have since changed this to be randomized and this exposed an error in my SortedList_insert, which I fixed as well.
+
+2. General pointer to a pointer versus local 2D array of elements: I originally used a 2D array of elements and then would pass that to the threadFunc through a struct; I found that that implementation de-initializes the keys for each element. Therefore, I have a general array of pointers to store my elements and keys and pass in a value to the threadFunc to let it know which iteration it should use.
+
+
+Some things that I referenced for this project: 
+1. Documentation for the GPROF: Used for profiling
+2. Various example Makefiles to figure out the format I would use for mine.
+3. I used the previous iteration of the graphing file for the graphing file we had to write. 
